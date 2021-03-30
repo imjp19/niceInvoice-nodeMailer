@@ -13,6 +13,17 @@ const invoiceDetail = {
     email: "jaypatel19124@gmail.com",
   },
   items: [
+ 
+    {
+      item: "Computer Workshop",
+      price: 30.00,
+      tax: ""
+    },
+    {
+      item: "Aero Workshop",
+      price: 50.00,
+      tax: ""
+    },
     {
       item: "Engine Evolution",
       price: 50.00,
@@ -26,20 +37,22 @@ const invoiceDetail = {
       item: "Aero Workshop",
       price: 50.00,
       tax: ""
-    }
+    },
+    
+   
   ],
-  subtotal: 130,
+
   total: 130,
   order_number: "",
   payment_id: "",
   order_id: "order-54464",
   header: {
-    company_name: "Prakarsh 2021",
+    company_name: "Prakarsh XVI",
     company_logo: "prakarsh.png",
-    company_address: "SVIT, Vasad"
+    company_address: "Sardar Vallbhbhai Patel Institute of Technology\nSVIT Road, \nRajupura Village,\nAnand 388306"
   },
   footer: {
-    text: "Copyright © Prakarsh 2021\n www.prakarsh.org"
+    text: "Copyright © Prakarsh XVI\n www.prakarsh.org"
   },
   currency_symbol: "",
   date: {
@@ -60,15 +73,15 @@ async function main(pdfData) {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: 'jaypatel19124@gmail.com', // generated ethereal user
-      pass: 'vjzmiggrvmxwnvko', // generated ethereal password
+      user: '', // email
+      pass: '', // generate app password
     },
   });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Jay Patel" <jay.19beceg046@gmail.com>', // sender address
-    to: "ayaan.180410107098@gmail.com, ", // list of receivers
+    to: "jaypatel19124@gmail.com, ", // list of receivers
     subject: "[Prakarsh 2021] Here is your receipt🎉", // Subject line
     text: "", // plain text body
 

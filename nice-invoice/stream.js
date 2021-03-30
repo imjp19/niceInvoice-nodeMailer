@@ -26,4 +26,5 @@ const stream = require('stream');
     }
 }
 
+
 module.exports = WritableBufferStream;

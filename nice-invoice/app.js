@@ -42,8 +42,9 @@ let niceInvoice = (invoice, func) => {
 let header = (doc, invoice) => {
 
   if (fs.existsSync(invoice.header.company_logo)) {
-    doc.image(invoice.header.company_logo, 50, 45, { width: 50 })
+    doc.image(invoice.header.company_logo, 35, 25, { width: 75, height:75})
       .fontSize(25)
+      .font("Helvetica-Bold")
       .text(invoice.header.company_name, 110, 63)
       .font("Helvetica-Bold")
       .moveDown();
@@ -95,7 +96,7 @@ let customerInformation = (doc, invoice) => {
 
 let invoiceTable = (doc, invoice) => {
   let i;
-  const invoiceTableTop = 400;
+  const invoiceTableTop = 300;
   const currencySymbol = invoice.currency_symbol;
 
   doc.font("Helvetica-Bold");
