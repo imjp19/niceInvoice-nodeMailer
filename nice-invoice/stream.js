@@ -4,7 +4,7 @@ const stream = require('stream');
  * Simple writable buffer stream
  * @docs: https://nodejs.org/api/stream.html#stream_writable_streams
  */
-class WritableBufferStream extends stream.Writable {
+ class WritableBufferStream extends stream.Writable {
 
     constructor(options) {
         super(options);
@@ -25,3 +25,5 @@ class WritableBufferStream extends stream.Writable {
         return Buffer.concat(this._chunks);
     }
 }
+
+module.exports = WritableBufferStream;

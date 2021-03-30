@@ -14,37 +14,36 @@ const invoiceDetail = {
   },
   items: [
     {
-      item: "Chair",
+      item: "Engine Evolution",
       price: 50.00,
     },
     {
-      item: "Watch",
+      item: "Computer Workshop",
       price: 30.00,
       tax: ""
     },
     {
-      item: "Water Glass Set",
-      price: 35.00,
+      item: "Aero Workshop",
+      price: 50.00,
       tax: ""
     }
   ],
-  subtotal: 156,
-  total: 156,
-  order_number: 1234222,
-  payment_id: "aafa2fa3f5af",
+  subtotal: 130,
+  total: 130,
+  order_number: "",
+  payment_id: "",
   order_id: "order-54464",
   header: {
     company_name: "Prakarsh 2021",
     company_logo: "prakarsh.png",
-    company_address: "Nice Invoice. 123 William Street 1th Floor New York, NY 123456"
+    company_address: "SVIT, Vasad"
   },
   footer: {
-    text: "Copyright ©\n Note"
+    text: "Copyright © Prakarsh 2021\n www.prakarsh.org"
   },
-  currency_symbol: "₹",
+  currency_symbol: "",
   date: {
     billing_date: "08 August 2020",
-
   }
 };
 
@@ -69,15 +68,16 @@ async function main(pdfData) {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"Jay Patel" <jay.19beceg046@gmail.com>', // sender address
-    to: "jay@mehdev.club, jaypatel19124@gmail.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Here is your receipt", // plain text body
+    to: "ayaan.180410107098@gmail.com, ", // list of receivers
+    subject: "[Prakarsh 2021] Here is your receipt🎉", // Subject line
+    text: "", // plain text body
 
 
     attachments: [
       {
         filename: "Invoice.pdf",
-        path: pdfData,
+        content: pdfData,
+        encoding: "base64"
       }
     ]
 

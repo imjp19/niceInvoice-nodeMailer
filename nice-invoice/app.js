@@ -1,10 +1,11 @@
 const fs = require("fs");
 const PDFDocument = require("pdfkit");
 const stream = require("./stream");
+const WritableBufferStream = require("./stream.js");
 
 let niceInvoice = (invoice, func) => {
   let doc = new PDFDocument({ size: "A4", margin: 40, })
-  let writeStream = new stream.WritableBufferStream();
+  let writeStream = new WritableBufferStream();
   doc.pipe(writeStream);
   doc.image(invoice.niceInvoice.prakarsh_logo, 50, 200, { widht: 500, height: 500 })
 
@@ -31,8 +32,8 @@ let niceInvoice = (invoice, func) => {
 
   writeStream.on('finish', () => {
     // console log pdf as bas64 string
-    console.log(writeStream.toBuffer().toString('base64'));
-    func(writeStream.toBuffer()).catch(console.error);
+    // console.log(writeStream.toBuffer().toString('base64'));
+    func(writeStream.toBuffer().toString('base64')).catch(console.error);
   });
   doc.end();
 
@@ -69,12 +70,12 @@ let customerInformation = (doc, invoice) => {
   const customerInformationTop = 200;
 
   doc.fontSize(10)
-    .text("Invoice Number:", 50, customerInformationTop)
-    .font("Helvetica-Bold")
+    // .text("Invoice Number:", 50, customerInformationTop)
+    // .font("Helvetica-Bold")
     .text(invoice.order_number, 150, customerInformationTop)
     .font("Helvetica")
-    .text("Payment Id:", 50, customerInformationTop + 15)
-    .font("Helvetica-Bold")
+    // .text("Payment Id:", 50, customerInformationTop + 15)
+    // .font("Helvetica-Bold")
     .text(invoice.payment_id, 150, customerInformationTop + 15)
     .font("Helvetica")
     .text("Billing Date:", 50, customerInformationTop + 30)
@@ -101,10 +102,10 @@ let invoiceTable = (doc, invoice) => {
   tableRow(
     doc,
     invoiceTableTop,
-    "Item",
-    "",
-    "Unit Cost",
-    "",
+    "Events",
+    "Price",
+    "Price",
+    "Price",
     "Total",
     ""
   );
@@ -118,9 +119,9 @@ let invoiceTable = (doc, invoice) => {
       doc,
       position,
       item.item,
-      item.description,
+      
       formatCurrency(item.price, currencySymbol),
-      item.quantity,
+      
       formatCurrency(applyTaxIfAvailable(item.price, item.quantity), currencySymbol),
 
     );
@@ -133,8 +134,8 @@ let invoiceTable = (doc, invoice) => {
   totalTable(
     doc,
     subtotalPosition,
-    "Subtotal",
-    formatCurrency(invoice.total, currencySymbol)
+    "",
+    // formatCurrency(invoice.total, currencySymbol)
   );
 
   const paidToDatePosition = subtotalPosition + 20;
@@ -169,20 +170,15 @@ let tableRow = (
   doc,
   y,
   item,
-  description,
-  unitCost,
-  quantity,
   lineTotal,
-  tax
+  
 ) => {
   doc
     .fontSize(10)
     .text(item, 50, y)
-    .text(description, 130, y)
-    .text(unitCost, 280, y, { width: 90, align: "right" })
-    .text(quantity, 335, y, { width: 90, align: "right" })
+  
     .text(lineTotal, 400, y, { width: 90, align: "right" })
-    .text(tax, 0, y, { align: "right" });
+  
 }
 
 let generateHr = (doc, y) => {
